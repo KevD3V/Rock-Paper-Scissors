@@ -1,11 +1,28 @@
 console.log("Hello World!");
 
-//console.log(getComputerChoice());
-// console.log(getHumanChoice());
+const rockBTN = document.querySelector("#rock");
+const paperBTN = document.querySelector("#paper");
+const scissorsBTN = document.querySelector("#scissors");
 
 let playerScore = 0, computerScore = 0;
 
-console.log(playGame(5));
+rockBTN.addEventListener("click", () => {
+    console.log(playRound("ROCK", getComputerChoice()));
+});
+paperBTN.addEventListener("click", () => {
+    console.log(playRound("PAPER", getComputerChoice()));
+});
+
+scissorsBTN.addEventListener("click", () => {
+    console.log(playRound("SCISSORS", getComputerChoice()));
+});
+
+
+
+
+// console.log(getComputerChoice());
+// console.log(getHumanChoice());
+// console.log(playGame(5));
 
 
 
@@ -86,11 +103,9 @@ function playRound(player, computer) {
         return "No cheating. Round win goes to computer.";
     }
 
-
-
-
-
+    console.log("Round triggered.");
 }
+
 
 function playGame(rounds) {
     for (let i = 0; i < rounds; i++) {
