@@ -1,31 +1,59 @@
-console.log("Hello World!");
+/**
+ * Remember square 1. 
+ */
+// console.log("Hello World!");
 
+
+/**
+ * Get reference to HTML elements
+ */
+// Buttons
 const rockBTN = document.querySelector("#rock");
 const paperBTN = document.querySelector("#paper");
 const scissorsBTN = document.querySelector("#scissors");
+// divs
+const results = document.querySelector("#results");
+const score = document.querySelector("#score");
 
+/**
+ * Game Variables
+ */
 let playerScore = 0, computerScore = 0;
 
+/**
+ * Game UI
+ */
+let newResultsText;
+
+/***
+ * Add Event Listeners
+ */
 rockBTN.addEventListener("click", () => {
-    console.log(playRound("ROCK", getComputerChoice()));
+    newResultsText = playRound("ROCK", getComputerChoice());
+    updateResults(newResultsText);
+    resetResults();
+    updatePlayerScore(playerScore, computerScore);
 });
 paperBTN.addEventListener("click", () => {
-    console.log(playRound("PAPER", getComputerChoice()));
+    newResultsText = playRound("PAPER", getComputerChoice());
+    updateResults(newResultsText);
+    resetResults();
+    updatePlayerScore(playerScore, computerScore);
+
 });
 
 scissorsBTN.addEventListener("click", () => {
-    console.log(playRound("SCISSORS", getComputerChoice()));
+    newResultsText = playRound("SCISSORS", getComputerChoice());
+    updateResults(newResultsText);
+    resetResults();
+    updatePlayerScore(playerScore, computerScore);
 });
 
 
 
-
-// console.log(getComputerChoice());
-// console.log(getHumanChoice());
-// console.log(playGame(5));
-
-
-
+/***
+ * Use RNG to determine computer choice.
+ */
 function getComputerChoice() {
     let choice = Math.random() * 3;
 
@@ -44,11 +72,19 @@ function getComputerChoice() {
 }
 
 
-function getHumanChoice() {
-    let humanChoice = prompt("Choose:  Rock.   Paper.   Scissors.");
-    return humanChoice.toUpperCase();
+/***
+ * Use prompt to collect player choice input.
+ */
+function getPlayerChoice() {
+    let playerChoice = prompt("Choose:  Rock.   Paper.   Scissors.");
+    return playerChoice.toUpperCase();
 }
 
+/***
+ * Play a single round of Rock, Paper, Scissors.
+ * Compare player and computer choices and determine winner.
+ * 
+ */
 function playRound(player, computer) {
     if (player === "ROCK") {
         if (computer === "ROCK") {
@@ -86,7 +122,7 @@ function playRound(player, computer) {
         if (computer === "ROCK") {
             // Computer wins. 
             computerScore++;
-            return "Scissors beats rock.";
+            return "Rock beats scissors.";
         }
         else if (computer === "PAPER") {
             // Player wins.
@@ -106,11 +142,51 @@ function playRound(player, computer) {
     console.log("Round triggered.");
 }
 
-
+/***
+ * Start the game by playing a number of rounds.
+ */
 function playGame(rounds) {
     for (let i = 0; i < rounds; i++) {
-        console.log(playRound(getHumanChoice(), getComputerChoice()));
+        console.log(playRound(getPlayerChoice(), getComputerChoice()));
     }
 
     return "Player score: " + playerScore + " Computer score: " + computerScore;
+}
+
+/**
+ * Update results div with new results text. 
+ */
+function updateResults(update) {
+    results.textContent = update;
+}
+
+/**
+ * Reset results div.
+ */
+function resetResults() {
+    newResultsText = "";
+}
+
+/***
+ * Update score
+ */
+function updatePlayerScore(playerScore, computerScore) {
+    score.textContent = "Score: " + playerScore + " - " + computerScore;
+    checkWinConditions();
+}
+
+/**
+ * Check for winner.
+ * A player wins when they reach a score of 5.
+ */
+function checkWinConditions() {
+    let winText;
+    if (playerScore >= 5) {
+        winText = "Player WON!"
+        updateResults(winText);
+    }
+    else if (computerScore >= 5) {
+        winText = "Computer WON!";
+        updateResults(winText);
+    }
 }
