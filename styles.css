@@ -1,21 +1,44 @@
-html {
+body {
     background-color: grey;
+    margin: 0;
+    padding: 0;
 }
-
-
-
 
 .game {
     width: 500px;
+    height: 1000px;
+    margin: 0 auto;
     background-color: green;
 }
 
+h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
+#score {
+    text-align: center;
+    font-weight: 900;
+    font-size: 20px;
+}
 
-
+.button-container {
+    display: flex;
+    justify-content: space-around;
+}
 
 button {
-    height: 200px;
-    width: 200px;
-    color: blue;
+    width: 100px;
+    height: 100px;
+}
+
+#results {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: #222;
+    width: 90%;
+    height: 100px;
+    margin: 0 auto;
 }
